@@ -2,7 +2,7 @@
 require_once 'controller/connection.php';
 include 'controller/operator-validation.php';
 
-$queryData = mysqli_query($connection, "SELECT trans_order.*, customer.customer_name, trans_laundry_pickup.pickup_date FROM trans_order LEFT JOIN customer ON trans_order.id_customer = customer.id LEFT JOIN trans_laundry_pickup ON trans_order.id = trans_laundry_pickup.id_order ORDER BY trans_order.order_status DESC, trans_order.updated_at DESC")
+$queryData = mysqli_query($connection, "SELECT trans_order.*, customer.customer_name, trans_laundry_pickup.pickup_date FROM trans_order LEFT JOIN customer ON trans_order.id_customer = customer.id LEFT JOIN trans_laundry_pickup ON trans_order.id = trans_laundry_pickup.id_order ORDER BY trans_order.order_status ASC, trans_order.updated_at DESC")
 ?>
 <div class="card shadow">
     <div class="card-header">
