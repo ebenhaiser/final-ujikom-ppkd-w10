@@ -16,7 +16,7 @@ $queryData = mysqli_query($connection, "SELECT user.id, user.deleted_at, user.us
                 <tr>
                     <th>#</th>
                     <th>Level</th>
-                    <th>Full Nama</th>
+                    <th>Nama</th>
                     <th>Email</th>
                     <th>Action</th>
                 </tr>

@@ -35,7 +35,7 @@ if (isset($_GET['delete'])) {
 
     $queryValidationEmail = mysqli_query($connection, "SELECT * FROM user WHERE email = '$email'");
     if (mysqli_num_rows($queryValidationEmail) > 0) {
-        header("location: ?page=add-user&error=emailAlreadyRegistered&email=" . $email . "&username=" . $username);
+        header("location: ?page=add-user&error=emailAlreadyRegistered&email=" . $email . "&username=" . $username . "&id_level=" . $id_level);
         die;
     }
 
@@ -67,7 +67,7 @@ $queryLevel = mysqli_query($connection, "SELECT * FROM level");
                 <div class="col-sm-6 mb-3">
                     <label for="username" class="form-label">Nama</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="Enter Name"
-                        value="<?= !isset($_GET['email']) && isset($_GET['edit']) ? $rowEdit['username'] : '' ?><?= isset($_GET['error']) && isset($_GET['username']) ? $_GET['username'] : '' ?>"
+                        value="<?= !isset($_GET['username']) && isset($_GET['edit']) ? $rowEdit['username'] : '' ?><?= isset($_GET['error']) && isset($_GET['username']) ? $_GET['username'] : '' ?>"
                         required>
                 </div>
                 <div class=" col-sm-6 mb-3">
@@ -78,11 +78,11 @@ $queryLevel = mysqli_query($connection, "SELECT * FROM level");
                 </div>
                 <div class="col-sm-6 mb-3">
                     <label for="level" class="form-label">Level</label>
-                    <select class="form-control" name="id_level" id="">
+                    <select class="form-control" name="id_level" id="" required>
                         <option value=""> -- Add Level -- </option>
                         <?php while ($rowLevel = mysqli_fetch_assoc($queryLevel)) : ?>
                             <option value="<?= $rowLevel['id'] ?>"
-                                <?= isset($_GET['edit']) && ($rowLevel['id'] == $rowEdit['id_level']) ? 'selected' : '' ?>>
+                                <?= !isset($_GET['id_level']) && isset($_GET['edit']) && ($rowLevel['id'] == $rowEdit['id_level']) ? 'selected' : '' ?><?= isset($_GET['error']) && isset($_GET['id_level']) && ($_GET['id_level'] == $rowLevel['id']) ? 'selected' : '' ?>>
                                 <?= $rowLevel['level_name'] ?></option>
                         <?php endwhile ?>
                     </select>
@@ -90,7 +90,7 @@ $queryLevel = mysqli_query($connection, "SELECT * FROM level");
                 <div class="col-sm-6 form-group mb-3 form-password-toggle">
                     <label for="" class="form-label">Password</label>
                     <div class="input-group input-group-merge">
-                        <input type="password" id="password" class="form-control" name="password"
+                        <input required type="password" id="password" class="form-control" name="password"
                             placeholder="Enter password" aria-describedby="password" />
                         <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                     </div>
