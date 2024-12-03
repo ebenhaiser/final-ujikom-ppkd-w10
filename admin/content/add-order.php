@@ -137,38 +137,40 @@ $queryCustomer = mysqli_query($connection,  "SELECT * FROM customer");
             <h4>Order List</h4>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-responsive table-bordered">
-                <thead>
-                    <tr>
-                        <th>Service Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    while ($rowOrderList = mysqli_fetch_assoc($queryOrderList)):
-                    ?>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
                         <tr>
-                            <td><?= isset($rowOrderList['service_name']) ? $rowOrderList['service_name'] : '-' ?></td>
-                            <td><?= isset($rowOrderList['price']) ? 'Rp ' . number_format($rowOrderList['price'], 2, ',', '.') : '-' ?>
-                            </td>
-                            <td><?= isset($rowOrderList['qty']) ? $rowOrderList['qty'] . ' gram(s)' : '-' ?></td>
-                            <td><?= isset($rowOrderList['subtotal']) ? 'Rp ' . number_format($rowOrderList['subtotal'], 2, ',', '.') : '-' ?>
-                            </td>
+                            <th>Service Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
                         </tr>
-                    <?php
-                    endwhile;
-                    ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" align="right"><strong>Total</strong></td>
-                        <td><?= 'Rp ' . number_format($rowView['total_price'],  2, ',', '.') ?></td>
-                    </tr>
-                </tfoot>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        while ($rowOrderList = mysqli_fetch_assoc($queryOrderList)):
+                        ?>
+                            <tr>
+                                <td><?= isset($rowOrderList['service_name']) ? $rowOrderList['service_name'] : '-' ?></td>
+                                <td><?= isset($rowOrderList['price']) ? 'Rp ' . number_format($rowOrderList['price'], 2, ',', '.') : '-' ?>
+                                </td>
+                                <td><?= isset($rowOrderList['qty']) ? $rowOrderList['qty'] . ' gram(s)' : '-' ?></td>
+                                <td><?= isset($rowOrderList['subtotal']) ? 'Rp ' . number_format($rowOrderList['subtotal'], 2, ',', '.') : '-' ?>
+                                </td>
+                            </tr>
+                        <?php
+                        endwhile;
+                        ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" align="right"><strong>Total</strong></td>
+                            <td><?= 'Rp ' . number_format($rowView['total_price'],  2, ',', '.') ?></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
             <div class="mt-3 gap-3" align="right">
                 <a href="?page=order" class="btn btn-secondary">Back</a>
             </div>
@@ -245,29 +247,31 @@ $queryCustomer = mysqli_query($connection,  "SELECT * FROM customer");
                         <i class="bx bx-plus"></i>
                     </button>
                 </div>
-                <table class="table table-responsive table-bordered table-striped mb-3">
-                    <thead>
-                        <tr>
-                            <th>Act</th>
-                            <th>Service Name</th>
-                            <th>Price</th>
-                            <th>Quantity (per gram)</th>
-                            <th>Subtotal</th>
-                        </tr>
-                    </thead>
-                    <tbody id="order_table">
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4" align="right"><strong>Total Price</strong></td>
-                            <td>
-                                <input type="text" id="total_price_formatted" style="border: none; outline: none;"
-                                    class="form-control" readonly>
-                                <input type="hidden" name="total_price" id="total_price" readonly>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped mb-3">
+                        <thead>
+                            <tr>
+                                <th>Act</th>
+                                <th>Service Name</th>
+                                <th>Price</th>
+                                <th>Quantity (per gram)</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="order_table">
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4" align="right"><strong>Total Price</strong></td>
+                                <td>
+                                    <input type="text" id="total_price_formatted" style="border: none; outline: none;"
+                                        class="form-control" readonly>
+                                    <input type="hidden" name="total_price" id="total_price" readonly>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
                 <input type="hidden" name="order_status" value="0">
                 <div class="row">
                     <div class="col-sm-6">

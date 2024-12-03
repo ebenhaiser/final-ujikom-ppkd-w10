@@ -120,66 +120,68 @@ $queryCustomer = mysqli_query($connection,  "SELECT * FROM customer");
                     </div>
                 </div>
             </div>
-            <table class="table table-striped table-responsive table-bordered">
-                <thead>
-                    <tr>
-                        <th>Service Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    while ($rowOrderList = mysqli_fetch_assoc($queryOrderList)):
-                    ?>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
                         <tr>
-                            <td><?= isset($rowOrderList['service_name']) ? $rowOrderList['service_name'] : '-' ?></td>
-                            <td><?= isset($rowOrderList['price']) ? 'Rp ' . number_format($rowOrderList['price'], 2, ',', '.') : '-' ?>
-                            </td>
-                            <td><?= isset($rowOrderList['qty']) ? $rowOrderList['qty'] . ' gram(s)' : '-' ?></td>
-                            <td><?= isset($rowOrderList['subtotal']) ? 'Rp ' . number_format($rowOrderList['subtotal'], 2, ',', '.') : '-' ?>
-                            </td>
+                            <th>Service Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
                         </tr>
-                    <?php
-                    endwhile;
-                    ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" align="right"><strong>Total</strong></td>
-                        <td><?= isset($rowView['total_price']) ? 'Rp ' . number_format($rowView['total_price'], 2, ',', '.') : '-' ?>
-                        </td>
-                        <input type="hidden" id="total_price_pickup" value="<?= $rowView['total_price'] ?>">
-                    </tr>
-                    <tr>
-                        <td colspan="3" align="right"><strong>Amount Pay</strong></td>
-                        <?php if ($rowView['order_status'] == 0): ?>
-                            <td>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon1">Rp</span>
-                                    <input type="number" name="pickup_pay" id="pickup_pay" class="form-control"
-                                        placeholder="Enter amount pay" required>
-                                </div>
+                    </thead>
+                    <tbody>
+                        <?php
+                        while ($rowOrderList = mysqli_fetch_assoc($queryOrderList)):
+                        ?>
+                            <tr>
+                                <td><?= isset($rowOrderList['service_name']) ? $rowOrderList['service_name'] : '-' ?></td>
+                                <td><?= isset($rowOrderList['price']) ? 'Rp ' . number_format($rowOrderList['price'], 2, ',', '.') : '-' ?>
+                                </td>
+                                <td><?= isset($rowOrderList['qty']) ? $rowOrderList['qty'] . ' gram(s)' : '-' ?></td>
+                                <td><?= isset($rowOrderList['subtotal']) ? 'Rp ' . number_format($rowOrderList['subtotal'], 2, ',', '.') : '-' ?>
+                                </td>
+                            </tr>
+                        <?php
+                        endwhile;
+                        ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" align="right"><strong>Total</strong></td>
+                            <td><?= isset($rowView['total_price']) ? 'Rp ' . number_format($rowView['total_price'], 2, ',', '.') : '-' ?>
                             </td>
-                        <?php elseif ($rowView['order_status'] == 1) : ?>
-                            <td><?= 'Rp. ' . number_format($rowView['order_pay'], 2, ',', '.') ?></td>
-                        <?php endif ?>
-                    </tr>
-                    <tr>
-                        <td colspan="3" align="right"><strong>Amount Change</strong></td>
-                        <?php if ($rowView['order_status'] == 0): ?>
-                            <td>
-                                <input type="text" class="form-control" id="pickup_change_formatted"
-                                    style="border: none; outline: none;" readonly>
-                                <input type="hidden" name="pickup_change" id="pickup_change" readonly>
-                            </td>
-                        <?php elseif ($rowView['order_status'] == 1) : ?>
-                            <td><?= 'Rp ' . number_format($rowView['order_change'], 2, ',', '.') ?></td>
-                        <?php endif  ?>
-                    </tr>
-                </tfoot>
-            </table>
+                            <input type="hidden" id="total_price_pickup" value="<?= $rowView['total_price'] ?>">
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="right"><strong>Amount Pay</strong></td>
+                            <?php if ($rowView['order_status'] == 0): ?>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">Rp</span>
+                                        <input type="number" name="pickup_pay" id="pickup_pay" class="form-control"
+                                            placeholder="Enter amount pay" required>
+                                    </div>
+                                </td>
+                            <?php elseif ($rowView['order_status'] == 1) : ?>
+                                <td><?= 'Rp. ' . number_format($rowView['order_pay'], 2, ',', '.') ?></td>
+                            <?php endif ?>
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="right"><strong>Amount Change</strong></td>
+                            <?php if ($rowView['order_status'] == 0): ?>
+                                <td>
+                                    <input type="text" class="form-control" id="pickup_change_formatted"
+                                        style="border: none; outline: none;" readonly>
+                                    <input type="hidden" name="pickup_change" id="pickup_change" readonly>
+                                </td>
+                            <?php elseif ($rowView['order_status'] == 1) : ?>
+                                <td><?= 'Rp ' . number_format($rowView['order_change'], 2, ',', '.') ?></td>
+                            <?php endif  ?>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
             <input type="hidden" name="order_status" value="1">
             <div class="mt-3 gap-3" align="right">
                 <a href="?page=pickup" class="btn btn-secondary">Back</a>

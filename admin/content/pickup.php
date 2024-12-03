@@ -10,61 +10,63 @@ $queryData = mysqli_query($connection, "SELECT trans_order.*, customer.customer_
     </div>
     <div class="card-body">
         <?php include 'controller/alert-data-crud.php' ?>
-        <table class="table table-bordered table-striped table-hover table-responsive mt-3">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Order Code</th>
-                    <th>Customer Name</th>
-                    <th>Order Start Date</th>
-                    <th>Order End Date</th>
-                    <th>Pickup Date</th>
-                    <th>Order Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $no = 1;
-                while ($rowData = mysqli_fetch_assoc($queryData)) : ?>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover mt-3">
+                <thead>
                     <tr>
-                        <td><?= $no++ ?></td>
-                        <td><?= isset($rowData['order_code']) ? $rowData['order_code'] : '-' ?></td>
-                        <td><?= isset($rowData['customer_name']) ? $rowData['customer_name'] : '-' ?></td>
-                        <td><?= isset($rowData['order_date']) ? $rowData['order_date'] : '-' ?></td>
-                        <td><?= isset($rowData['order_end_date']) ? $rowData['order_end_date'] : '-' ?></td>
-                        <td><?= isset($rowData['pickup_date']) ? $rowData['pickup_date'] : '-' ?></td>
-                        <?php $statusOrder = getOrderStatus($rowData['order_status']) ?>
-                        <td><?= $statusOrder ?></td>
-                        <td align="right">
-                            <a href="?page=add-pickup&view=<?php echo $rowData['id'] ?>">
-                                <button class="btn btn-secondary">
-                                    <?php if ($rowData['order_status'] == 0) : ?>
-                                        <i class="tf-icon bx bx-package bx-22px"></i>
-                                    <?php elseif ($rowData['order_status'] == 1) : ?>
-                                        <i class="tf-icon bx bx-show bx-22px"></i>
-                                    <?php endif ?>
-                                </button>
-                            </a>
-                            <?php if ($rowData['order_status'] == 1) : ?>
-                                <a href="content/misc/print.php?order=<?= $rowData['id'] ?>" target="_blank">
+                        <th>#</th>
+                        <th>Order Code</th>
+                        <th>Customer Name</th>
+                        <th>Order Start Date</th>
+                        <th>Order End Date</th>
+                        <th>Pickup Date</th>
+                        <th>Order Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $no = 1;
+                    while ($rowData = mysqli_fetch_assoc($queryData)) : ?>
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= isset($rowData['order_code']) ? $rowData['order_code'] : '-' ?></td>
+                            <td><?= isset($rowData['customer_name']) ? $rowData['customer_name'] : '-' ?></td>
+                            <td><?= isset($rowData['order_date']) ? $rowData['order_date'] : '-' ?></td>
+                            <td><?= isset($rowData['order_end_date']) ? $rowData['order_end_date'] : '-' ?></td>
+                            <td><?= isset($rowData['pickup_date']) ? $rowData['pickup_date'] : '-' ?></td>
+                            <?php $statusOrder = getOrderStatus($rowData['order_status']) ?>
+                            <td><?= $statusOrder ?></td>
+                            <td align="right">
+                                <a href="?page=add-pickup&view=<?php echo $rowData['id'] ?>">
                                     <button class="btn btn-secondary">
-                                        <i class="tf-icon bx bx-printer bx-22px"></i>
+                                        <?php if ($rowData['order_status'] == 0) : ?>
+                                            <i class="tf-icon bx bx-package bx-22px"></i>
+                                        <?php elseif ($rowData['order_status'] == 1) : ?>
+                                            <i class="tf-icon bx bx-show bx-22px"></i>
+                                        <?php endif ?>
                                     </button>
                                 </a>
-                            <?php endif ?>
-                            <a onclick="return confirm ('Apakah anda yakin akan menghapus data ini?')"
-                                href="?page=add-pickup&delete=<?php echo $rowData['id'] ?>">
-                                <button class="btn btn-danger">
-                                    <i class="tf-icon bx bx-trash bx-22px"></i>
-                                </button>
-                            </a>
-                        </td>
-                    </tr>
-                <?php endwhile; // End While 
-                ?>
-            </tbody>
-        </table>
+                                <?php if ($rowData['order_status'] == 1) : ?>
+                                    <a href="content/misc/print.php?order=<?= $rowData['id'] ?>" target="_blank">
+                                        <button class="btn btn-secondary">
+                                            <i class="tf-icon bx bx-printer bx-22px"></i>
+                                        </button>
+                                    </a>
+                                <?php endif ?>
+                                <a onclick="return confirm ('Apakah anda yakin akan menghapus data ini?')"
+                                    href="?page=add-pickup&delete=<?php echo $rowData['id'] ?>">
+                                    <button class="btn btn-danger">
+                                        <i class="tf-icon bx bx-trash bx-22px"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endwhile; // End While 
+                    ?>
+                </tbody>
+            </table>
+        </div>
         <div class="mt-4" align="right">
             <span class="me-4"><i class="bx bx-show"></i> = Detail</span>
             <span class="me-4"><i class="bx bx-package"></i> = Pickup</span>

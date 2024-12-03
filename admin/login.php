@@ -87,6 +87,14 @@ if (isset($_POST['login'])) {
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="assets/admin/assets/js/config.js"></script>
+
+  <style>
+    body {
+      user-select: none;
+      /* Mencegah teks dipilih */
+    }
+  </style>
+
 </head>
 
 <body>
@@ -100,7 +108,7 @@ if (isset($_POST['login'])) {
           <div class="card-body">
             <!-- Logo -->
             <div class="app-brand justify-content-center">
-              <a href="index.html" class="app-brand-link gap-2">
+              <a href="" class="app-brand-link gap-2">
                 <span class="app-brand-logo demo">
                   <!-- <svg
                     width="25"

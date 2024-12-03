@@ -43,6 +43,13 @@ if (empty($_SESSION['id'])) {
   <meta name="description" content="" />
 
   <?php include 'inc/head.php' ?>
+
+  <style>
+    body {
+      user-select: none;
+      /* Mencegah teks dipilih */
+    }
+  </style>
 </head>
 
 <body>
