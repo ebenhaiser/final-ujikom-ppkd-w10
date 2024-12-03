@@ -16,9 +16,9 @@ $queryData = mysqli_query($connection, "SELECT * FROM type_of_service ORDER BY i
                 <tr>
                     <th>#</th>
                     <th>Service Name</th>
-                    <th>Price/Kg</th>
+                    <th style="min-width: 130px;">Price/Kg</th>
                     <th>Description</th>
-                    <th>Action</th>
+                    <th style="min-width: 170px;">Action</th>
                 </tr>
             </thead>
             <tbody>

@@ -17,7 +17,7 @@ if (isset($_GET['delete'])) {
         $password = $_POST['password'] ? $_POST['password'] : $rowEdit['password'];
         $id_level = $_POST['id_level'];
 
-        $queryValidationEmail = mysqli_query($connection, "SELECT * FROM user WHERE id != '$id_level' AND email = '$email'");
+        $queryValidationEmail = mysqli_query($connection, "SELECT * FROM user WHERE id != '$idEdit' AND email = '$email'");
         if (mysqli_num_rows($queryValidationEmail) > 0) {
             header("location: ?page=add-user&edit=" . $idEdit . "&error=emailAlreadyRegistered");
             die;
@@ -51,7 +51,7 @@ $queryLevel = mysqli_query($connection, "SELECT * FROM level");
         aria-live="assertive" aria-atomic="true" data-delay="2000">
         <div class="toast-header">
             <i class="bx bx-edit me-2"></i>
-            <div class="me-auto fw-semibold">Login</div>
+            <div class="me-auto fw-semibold">Data User</div>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">This EMAIL is already registered.</div>

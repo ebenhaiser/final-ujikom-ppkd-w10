@@ -16,6 +16,12 @@ if (isset($_GET['delete'])) {
         $price = $_POST['price'];
         $description = $_POST['description'];
 
+        $queryValidation = mysqli_query($connection, "SELECT * FROM type_of_service WHERE id != '$idEdit' AND service_name = '$service_name'");
+        if (mysqli_num_rows($queryValidation) > 0) {
+            header("location: ?page=add-service&edit=" . $idEdit . "&error=nameAlreadyRegistered");
+            die;
+        }
+
         $queryEdit = mysqli_query($connection, "UPDATE type_of_service SET service_name='$service_name', price='$price', description='$description' WHERE id='$idEdit'");
         header("Location: ?page=service&edit=success");
         die;
@@ -25,12 +31,28 @@ if (isset($_GET['delete'])) {
     $price = $_POST['price'];
     $description = $_POST['description'];
 
+    $queryValidation = mysqli_query($connection, "SELECT * FROM type_of_service WHERE service_name = '$service_name'");
+    if (mysqli_num_rows($queryValidation) > 0) {
+        header("location: ?page=add-service&error=nameAlreadyRegistered");
+        die;
+    }
+
     $queryAdd = mysqli_query($connection, "INSERT INTO type_of_service (service_name, price, description) VALUES ('$service_name', '$price', '$description')");
     header("Location: ?page=service&add=success");
     die;
 }
 ?>
-
+<?php if (isset($_GET['error']) && $_GET['error'] == 'nameAlreadyRegistered'): ?>
+    <div class="bs-toast toast toast-placement-ex m-2 fade bg-danger top-0 start-50 translate-middle-x show" role="alert"
+        aria-live="assertive" aria-atomic="true" data-delay="2000">
+        <div class="toast-header">
+            <i class="bx bx-edit me-2"></i>
+            <div class="me-auto fw-semibold">Data Service</div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">Do not use the same service name as others.</div>
+    </div>
+<?php endif ?>
 <div class="card shadow">
     <div class="card-header">
         <h3><?= isset($_GET['edit']) ? 'Edit' : 'Add' ?> Service</h3>
