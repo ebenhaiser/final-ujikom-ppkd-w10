@@ -90,8 +90,8 @@ $queryLevel = mysqli_query($connection, "SELECT * FROM level");
                 <div class="col-sm-6 form-group mb-3 form-password-toggle">
                     <label for="" class="form-label">Password</label>
                     <div class="input-group input-group-merge">
-                        <input required type="password" id="password" class="form-control" name="password"
-                            placeholder="Enter password" aria-describedby="password" />
+                        <input type="password" id="password" class="form-control" name="password"
+                            placeholder="Enter password" aria-describedby="password" <?= !isset($_GET['edit']) ? 'required' : '' ?> />
                         <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                     </div>
                 </div>

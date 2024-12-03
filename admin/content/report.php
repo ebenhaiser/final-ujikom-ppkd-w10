@@ -36,6 +36,7 @@ if (isset($_GET['clear'])) {
         <h3>Data Report</h3>
     </div>
     <div class="card-body">
+        <?php include 'controller/alert-data-crud.php' ?>
         <form method="get">
             <div class="row">
                 <div class="col-sm-3">

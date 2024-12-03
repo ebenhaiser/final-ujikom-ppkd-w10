@@ -27,7 +27,7 @@ if (isset($_GET['view'])) {
         $order_status = $_POST['order_status'];
         $queryUpdateOrderStatus = mysqli_query($connection, "UPDATE trans_order SET order_status = '$order_status' WHERE id = '$id_order'");
 
-        header("Location:?page=pickup&pickup=success");
+        header("Location:?page=report&pickup=success");
         die;
     }
 } else if (isset($_GET['delete'])) {
@@ -35,7 +35,7 @@ if (isset($_GET['view'])) {
     $queryDelete = mysqli_query($connection, "DELETE FROM trans_order WHERE id='$idDelete'");
     $queryDeleteDetail = mysqli_query($connection, "DELETE FROM trans_order_detail WHERE id_order='$idDelete'");
     $queryDeletePickup = mysqli_query($connection, "DELETE FROM trans_laundry_pickup WHERE id_order = '$idDelete'");
-    header("Location:?page=pickup&delete=success");
+    header("Location:?page=report&delete=success");
     die;
 }
 

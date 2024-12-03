@@ -1,6 +1,6 @@
 <?php
 include 'controller/administrator-validation.php';
-$queryData = mysqli_query($connection, "SELECT * FROM type_of_service ORDER BY id ASC");
+$queryData = mysqli_query($connection, "SELECT * FROM type_of_service ORDER BY updated_at DESC");
 ?>
 <div class="card shadow">
     <div class="card-header">
