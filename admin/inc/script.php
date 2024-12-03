@@ -85,7 +85,7 @@
         newRow += "<td>" + serviceName + "</td>";
         newRow += "<input type='hidden' name='id_service[]' value='" + serviceId + "'>";
         newRow += "<td>" + formattedPrice + "</td>";
-        newRow += "<td>" + qty + "</td>";
+        newRow += "<td>" + qty + " grams(s)</td>";
         newRow += "<input type='hidden' name='qty[]' value='" + qty + "'>";
         newRow += "<td>" + formattedSubtotal + "</td>";
         newRow += "<input type='hidden' name='subtotal[]' value='" + subtotal + "' class='subtotal'>";

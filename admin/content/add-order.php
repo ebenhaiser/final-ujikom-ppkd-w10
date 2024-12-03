@@ -254,7 +254,7 @@ $queryCustomer = mysqli_query($connection,  "SELECT * FROM customer");
                                 <th>Act</th>
                                 <th>Service Name</th>
                                 <th>Price</th>
-                                <th>Quantity (per gram)</th>
+                                <th>Quantity</th>
                                 <th>Subtotal</th>
                             </tr>
                         </thead>
